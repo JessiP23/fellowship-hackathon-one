@@ -1,12 +1,41 @@
-import React, { Children, createContext, useState } from "react";
+import React, { Children, createContext, useEffect, useState } from "react";
 import './Home.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Form from 'react-bootstrap/Form';
-import Button from '@mui/material/Button'
+import Button from '@mui/material/Button';
+import axios from 'axios';
 
 
 function Home () {
     const username = localStorage.getItem('username');
+    const [attendance, setAttendance] = useState([]);
+
+    useEffect(() => {
+        updateAttendance();
+    }, []);
+
+    const updateAttendance = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/attendance/list', {withCredentials: true});
+            setAttendance(response.data);
+        } catch (error) {
+            console.error("ERror fetching attendance history", error);
+        }
+    };
+
+    const scanUsers = async() => {
+        const recordData = {
+            date: new Date().toLocaleString(),
+            location: "Admin",
+        };
+
+        try {
+            await axios.post('http://localhost:5000/api/attendance', recordData, {withCredentials: true});
+            updateAttendance();
+        } catch (error) {
+            console.error('Error saving attendance data:', error);
+        }
+    }
     
     return (
         <div>
@@ -14,6 +43,13 @@ function Home () {
             <div className="row">
                 <div className="col-7 text-center atten">
                     <h3>Attendance History</h3>
+                    <ul>
+                        {attendance.map((record, index) => (
+                            <li key={index}>
+                                {record.date} - {record.location}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
                 <div className="col-5 text-center attenn">
                     <div className="status-attendance">
@@ -41,7 +77,7 @@ function Home () {
                     </div>
                     <div>
                         <h3>Take Attendance</h3>
-                        <Button className="button-styling" variant="outlined">
+                        <Button className="button-styling" variant="outlined" onClick={scanUsers}>
                             Click to Scan
                         </Button>
                     </div>

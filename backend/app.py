@@ -1,7 +1,8 @@
-from flask import Flask, request
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
+from flask_restful import Api
 
 # Initialize Flask extensions
 db = SQLAlchemy()
@@ -12,7 +13,7 @@ def create_app():
     app.config.from_object('config.Config')
 
     # Enable CORS for specific origin
-    CORS(app, resources={r"/*": {"origins": "http://localhost:3000/"}})
+    CORS(app, resources={r"/*": {"origins": "http://localhost:3000/"}}, supports_credentials=True)
 
     db.init_app(app)
     jwt.init_app(app)
@@ -31,11 +32,13 @@ def create_app():
 
     with app.app_context(): 
         from resources.user import UserRegister, UserLogin
-        from flask_restful import Api
+        from resources.attendance import AttendanceList, AttendanceRecord
 
         api = Api(app)
         api.add_resource(UserRegister, '/register')
         api.add_resource(UserLogin, '/login')
+        api.add_resource(AttendanceRecord, '/api/attendance')
+        api.add_resource(AttendanceList, '/api/attendance/list')
 
         db.create_all()
 
