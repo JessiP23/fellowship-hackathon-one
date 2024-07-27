@@ -24,7 +24,6 @@ function Login() {
         username,
         password
       });
-<<<<<<< HEAD:frontend/react-fronten/src/components/login.js
 
       localStorage.setItem('username', username);
 
@@ -41,12 +40,7 @@ function Login() {
       // const { access_token } = response.data;
       // localStorage.setItem('token', access_token);
       // navigate('/');  // Navigate to the homepage after successful login
-=======
-      const { access_token } = response.data;
-      localStorage.setItem('token', access_token);
-      console.log("Login successful! Redirecting to homepage...");
-      navigate('/home');  // Navigate to the homepage after successful login
->>>>>>> 6814eed8d701ce8c1429c93bdaca59d687a4582f:frontend/react-fronten/src/login.js
+
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         setErrorMessage(error.response.data.message);  // Set error message from response

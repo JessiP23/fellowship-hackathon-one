@@ -1,18 +1,9 @@
 import './App.css';
-<<<<<<< HEAD
 import Signup from './components/signup';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import Login from './components/login';
 import Home from './components/Home';
-
-=======
-import Signup from "./signup";
-import Login from "./login";
-import Home from "./home"; // Import the Home component
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useState } from 'react';
->>>>>>> 6814eed8d701ce8c1429c93bdaca59d687a4582f
 
 function App() {
   return (
