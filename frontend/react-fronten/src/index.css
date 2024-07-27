@@ -40,14 +40,26 @@ input {
 
 body {
   color: #666;
-  background-color: #f1f2f2;
   font: 16px/26px "Raleway", sans-serif;
+}
+
+/* Background styles for signup/login pages */
+.form-background {
+  background-color: #f1f2f2;
   background-image: url("/public/images/backgroundmt.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;  
+  min-height: 100vh;
+  padding: 20px; /* Add padding to avoid content sticking to edges */
 }
 
+/* Background styles for home page */
+.home-background {
+  background-color: white; /* Plain white background */
+  min-height: 100vh;
+  padding: 20px; /* Add padding to avoid content sticking to edges */
+}
 .root {
   border-radius: 10px;
 }
@@ -182,7 +194,7 @@ body {
 .form-wrap .help-text p {
   text-align: center;
   font-size: 14px;
-} 
+}
 
 .tabs-content {
   backdrop-filter: blur(10px) opacity(0.8) grayscale(50%);
