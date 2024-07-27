@@ -39,7 +39,7 @@ function TeacherHome () {
     
     return (
         <div>
-            <h1 className="form">Welcome, {username}</h1>
+            <h1 className="form">Welcome back Teacher {username}</h1>
             <div className="row">
                 <div className="col-7 text-center atten">
                     <h3>Blabla</h3>
