@@ -19,13 +19,31 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/login', {
-        username,
-        password
+      // format of data from backend
+      const requestDataFromBackend = {
+        username: username,
+        password: password
+      };
+
+      // url to request data from backend
+      const response = await axios.post('http://127.0.0.1:5000/login', requestDataFromBackend, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,  //credentials with data
       });
-      const { access_token } = response.data;
-      localStorage.setItem('token', access_token);
-      navigate('/');  // Navigate to the homepage after successful login
+
+      // if response given exists
+      if (response.status == 200){
+        navigate('/dash', {
+          replace: true
+        });
+      } else {
+        console.error('login failed');
+      }
+      // const { access_token } = response.data;
+      // localStorage.setItem('token', access_token);
+      // navigate('/');  // Navigate to the homepage after successful login
     } catch (error) {
       console.error('Login error', error);
     }
@@ -41,7 +59,7 @@ function Login() {
         id="remember_me" 
         checked={rememberMe}
         onChange={(event) => setRememberMe(event.target.checked)}
-      />
+      /> 
       <label htmlFor="remember_me">Remember me</label>
       <input type="submit" className="button" value="Login" />
     </form>

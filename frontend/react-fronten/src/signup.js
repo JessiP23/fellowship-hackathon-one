@@ -21,19 +21,26 @@ function Signup() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/register', {
-        username,
-        password,
-        email
-      }, {
+      // send data to response in the username, password, and email format
+      const dataRequested = {
+        username: username,
+        password: password,
+        email: email,
+      };
+      console.log('Data sent to backend', dataRequested);
+      const response = await axios.post("http://127.0.0.1:5000/register", dataRequested, {
         headers: {
           'Content-Type': 'application/json'
         },
-        withCredentials: true  // Ensure credentials are included in the request
-      });
-      console.log('Signup successful', response.data);
+
+        withCredentials: true   // Keep credentials with the response
+      })
+      console.log('signup successfull', response.data);
     } catch (error) {
-      console.error('Signup error', error);
+      console.error('signup error', error);
+      if (error.response) {
+        console.error("Error response", error.response);
+      }
     }
   };
 

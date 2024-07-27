@@ -1,13 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
 import './App.css';
 import Signup from "./signup";
 import Login from "./login";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import HomeManager from '../components/HomeManager';
 
 function App() {
   const [activeTab, setActiveTab] = useState('signup-tab-content');
+  // add navigate for logged users to go to home page
+  const navigate = useNavigate();
 
   const openTab = (evt, tabName) => {
     evt.preventDefault();  // Prevent default anchor behavior
