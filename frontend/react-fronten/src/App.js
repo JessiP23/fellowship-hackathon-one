@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useState } from 'react';
 import Login from './components/login';
 import Home from './components/Home';
+import TeacherHome from './components/manager';
 
 function App() {
   return (
@@ -62,6 +63,8 @@ function AppContent() {
           </div>
         } />
         <Route path="/home" element={<Home />} /> {/* Add the route for Home component */}
+
+        <Route path='/teacher-dashboard' element={<TeacherHome />} />
       </Routes>
     </div>
   );

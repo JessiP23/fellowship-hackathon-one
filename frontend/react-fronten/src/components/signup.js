@@ -5,6 +5,7 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [position, setPosition] = useState('');
   const [message, setMessage] = useState("");  // State variable for the message
   const [messageColor, setMessageColor] = useState("");  // State variable for the message color
 
@@ -20,13 +21,19 @@ function Signup() {
     setEmail(event.target.value);
   };
 
+  const handlePositionChange = (event) => {
+    setPosition(event.target.value);
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // sending data to backend
       const response = await axios.post('http://127.0.0.1:5000/register', {
         username,
         password,
-        email
+        email,
+        position
       }, {
         headers: {
           'Content-Type': 'application/json'
@@ -53,11 +60,11 @@ function Signup() {
       <div className="choose-position d-flex row">
         <h3>I am a ...</h3>
         <div>
-          <input type="radio" name="position" value="student" />
+          <input type="radio" name="position" value="student" checked={position === 'student'} onChange={handlePositionChange} />
           <label>Student</label>
         </div>
         <div>
-          <input type="radio" name="position" value="teacher" />
+          <input type="radio" name="position" value="teacher" checked={position === 'teacher'} onChange={handlePositionChange} />
           <label>Teacher</label>
         </div>
       </div>

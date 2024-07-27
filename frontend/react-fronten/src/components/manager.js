@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 
 
-function Home () {
+function TeacherHome () {
     const username = localStorage.getItem('username');
     const [attendance, setAttendance] = useState([]);
 
@@ -87,4 +87,4 @@ function Home () {
     )
 }
 
-export default Home;
+export default TeacherHome;
