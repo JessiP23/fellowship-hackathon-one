@@ -33,9 +33,13 @@ function Login() {
         withCredentials: true,  //credentials with data
       });
 
+      localStorage.setItem('username', username);
+
+      window.location.href = '/home';
+
       // if response given exists
       if (response.status == 200){
-        navigate('/dash', {
+        navigate('/home', {
           replace: true
         });
       } else {
@@ -62,6 +66,7 @@ function Login() {
       /> 
       <label htmlFor="remember_me">Remember me</label>
       <input type="submit" className="button" value="Login" />
+      <button type="submit">Login </button>
     </form>
   );
 }
