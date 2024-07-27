@@ -49,6 +49,18 @@ function Signup() {
 
   return (
     <form className="signup-form" onSubmit={handleSubmit}>
+
+      <div className="choose-position d-flex row">
+        <h3>I am a ...</h3>
+        <div>
+          <input type="radio" name="position" value="student" />
+          <label>Student</label>
+        </div>
+        <div>
+          <input type="radio" name="position" value="teacher" />
+          <label>Teacher</label>
+        </div>
+      </div>
       <input type="email" className="input" id="user_email" autoComplete="off" placeholder="Email" value={email} onChange={handleEmailChange} />
       <input type="text" className="input" id="user_name" autoComplete="off" placeholder="Username" value={username} onChange={handleUsernameChange} />
       <input type="password" className="input" id="user_pass" autoComplete="off" placeholder="Password" value={password} onChange={handlePasswordChange}/>

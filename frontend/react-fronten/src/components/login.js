@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -54,6 +55,7 @@ function Login() {
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}  {/* Conditionally render the error message */}
+
       <input type="text" className="input" autoComplete="off" placeholder="Username" value={username} onChange={handleUsernameChange}/>
       <input type="password" className="input" autoComplete="off" placeholder="Password" value={password} onChange={handlePasswordChange}/>
       <input 
@@ -65,7 +67,6 @@ function Login() {
       />
       <label htmlFor="remember_me">Remember me</label>
       <input type="submit" className="button" value="Login" />
-      <button type="submit">Login </button>
     </form>
   );
 }
