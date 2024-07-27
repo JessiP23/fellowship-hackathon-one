@@ -12,7 +12,7 @@ def create_app():
     app.config.from_object('config.Config')
 
     # Enable CORS for specific origin
-    CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+    CORS(app, resources={r"/*": {"origins": "http://localhost:3000/"}})
 
     db.init_app(app)
     jwt.init_app(app)
@@ -29,7 +29,7 @@ def create_app():
         response.headers.add('Access-Control-Allow-Credentials', 'true')
         return response
 
-    with app.app_context():
+    with app.app_context(): 
         from resources.user import UserRegister, UserLogin
         from flask_restful import Api
 
