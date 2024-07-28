@@ -37,7 +37,7 @@ function Home () {
     const scanUsers = async() => {
         const recordData = {
             date: new Date().toLocaleString(),
-            location: "Admin",
+            location: attendanceStatus ? "Present" : "Absent",
         };
 
         try {
@@ -70,7 +70,7 @@ function Home () {
                             <div key={`inline-${type}`} className="mb-3">
                             <Form.Check
                                 inline
-                                label="On"
+                                label="Present"
                                 name="group1"
                                 type={type}
                                 id={`inline-checkbox-1`}
@@ -79,7 +79,7 @@ function Home () {
                             />
                             <Form.Check
                                 inline
-                                label="Off"
+                                label="Absent"
                                 name="group1"
                                 type={type}
                                 id={`inline-checkbox-2`}
