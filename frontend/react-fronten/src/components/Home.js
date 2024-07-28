@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 function Home () {
-    const username = localStorage.getItem('username');
+    const studentUsername = localStorage.getItem('studentUsername');
     const [attendance, setAttendance] = useState([]);
     const [attendanceStatus, setAttendanceStatus] = useState(false);
 
@@ -50,7 +50,7 @@ function Home () {
     
     return (
         <div>
-            <h1 className="form">Welcome, {username}</h1>
+            <h1 className="form">Welcome, {studentUsername}</h1>
             <div className="row">
                 <div className="col-7 text-center atten">
                     <h3>Attendance History</h3>

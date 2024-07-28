@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
 from extensions import db, jwt, migrate
-from resources.attendance import AttendanceToggle, AttendanceStatus
+
 
 def create_app():
     app = Flask(__name__)
@@ -36,9 +36,7 @@ def create_app():
         api.add_resource(UserLogin, '/login')
         api.add_resource(AttendanceRecord, '/api/attendance')
         api.add_resource(AttendanceList, '/api/attendance/list')
-        api.add_resource(AttendanceToggle, '/api/attendance/toggle')
-        api.add_resource(AttendanceStatus, '/api/attendance/status')
-
+    
         db.create_all()
 
     return app

@@ -42,8 +42,10 @@ function Login() {
 
       // Redirect based on role
       if (position === 'student'){
+        localStorage.setItem('studentUsername', username);
         window.location.href = ('/home');
       } else if (position === 'teacher') {
+        localStorage.setItem('teacherUsername', username);
         window.location.href = ('/teacher-dashboard');
       }
 

@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 function TeacherHome () {
-    const username = localStorage.getItem('username');
+    const teacherUsername = localStorage.getItem('teacherUsername');
     const [attendanceStatus, setAttendanceStatus] = useState(false);
 
     useEffect(() => {
@@ -25,12 +25,14 @@ function TeacherHome () {
 
     return (
         <div>
-            <h1 className="form">Welcome back Teacher {username}</h1>
+            <h1 className="form text-center">Welcome back Teacher {teacherUsername}</h1>
 
-            <h3>Take Attendance</h3>
-            <Button className={`button-styling ${attendanceStatus ? 'active': 'inactive'}`} variant="outlined" onClick={toggleAttendance}>
+            <div className="text-center">
+                <h3 className="text-center">Take Attendance</h3>
+                <Button className={`button-styling ${attendanceStatus ? 'active': 'inactive'}`} variant="outlined" onClick={toggleAttendance}>
                 {attendanceStatus ? 'Stop Attendance' : 'Start Attendance'}
             </Button>
+            </div>
         </div>
     )
 }
