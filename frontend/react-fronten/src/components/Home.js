@@ -1,4 +1,4 @@
-import React, { Children, createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Home.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Form from 'react-bootstrap/Form';
@@ -9,9 +9,20 @@ import axios from 'axios';
 function Home () {
     const username = localStorage.getItem('username');
     const [attendance, setAttendance] = useState([]);
+    const [attendanceStatus, setAttendanceStatus] = useState(false);
 
     useEffect(() => {
+        const status = localStorage.getItem('attendanceStatus') === 'true';
+        setAttendanceStatus(status);
+
+        const intervalId = setInterval(() => {
+            const updatedStatus = localStorage.getItem('attendanceStatus') === 'true';
+            setAttendanceStatus(updatedStatus);
+        }, 1000);
+
+        return () => clearInterval(intervalId);
     }, []);
+
 
     const updateAttendance = async () => {
         try {
@@ -63,6 +74,7 @@ function Home () {
                                 name="group1"
                                 type={type}
                                 id={`inline-checkbox-1`}
+                                checked={attendanceStatus}
                                 readOnly
                             />
                             <Form.Check
@@ -71,6 +83,7 @@ function Home () {
                                 name="group1"
                                 type={type}
                                 id={`inline-checkbox-2`}
+                                checked={!attendanceStatus}
                                 readOnly
                             />
                             </div>

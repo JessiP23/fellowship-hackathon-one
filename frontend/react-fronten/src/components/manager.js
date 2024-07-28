@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from '@mui/material/Button';
 import './manager.css';
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 
 
 
@@ -13,34 +12,24 @@ function TeacherHome () {
     const [attendanceStatus, setAttendanceStatus] = useState(false);
 
     useEffect(() => {
-        fetchAttendanceStatus();
+        const status = localStorage.getItem('attendanceStatus') === 'true';
+        setAttendanceStatus(status);
     }, []);
 
-    const fetchAttendanceStatus = async() => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/attendance/status', {withCredentials: true})
-            setAttendanceStatus(response.data.status);
-        } catch (error) {
-            console.error('Error fetching attendance status', error);
-        }
+    const toggleAttendance = () => {
+        const newStatus = !attendanceStatus;
+        setAttendanceStatus(newStatus);
+        localStorage.setItem('attendanceStatus', newStatus);
     };
 
-    const toggleAttendance = async () => {
-        try {
-            await axios.post('http://localhost:5000/api/attendance/toggle', {}, {withCredentials: true});
-            fetchAttendanceStatus();
-        } catch (error) {
-            console.error('Error toggling attendance status:', error);
-        }
-    };
 
     return (
         <div>
             <h1 className="form">Welcome back Teacher {username}</h1>
 
             <h3>Take Attendance</h3>
-            <Button className={`button-styling ${attendanceStatus ? 'active' : 'inactive'}`} variant="outlined" onClick={toggleAttendance}>
-                {attendanceStatus ? 'Stop Attendance' : "Start Attendance"}
+            <Button className={`button-styling ${attendanceStatus ? 'active': 'inactive'}`} variant="outlined" onClick={toggleAttendance}>
+                {attendanceStatus ? 'Stop Attendance' : 'Start Attendance'}
             </Button>
         </div>
     )

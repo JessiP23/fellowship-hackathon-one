@@ -4,7 +4,6 @@ from flask_restful import Api
 from extensions import db, jwt, migrate
 from resources.attendance import AttendanceToggle, AttendanceStatus
 
-
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
