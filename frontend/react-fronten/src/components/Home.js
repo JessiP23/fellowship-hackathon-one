@@ -9,11 +9,8 @@ import axios from 'axios';
 function Home () {
     const username = localStorage.getItem('username');
     const [attendance, setAttendance] = useState([]);
-    const [attendanceStatus, setAttendanceStatus] = useState(false);
 
     useEffect(() => {
-        updateAttendance();
-        fetchAttendanceStatus();
     }, []);
 
     const updateAttendance = async () => {
@@ -25,14 +22,6 @@ function Home () {
         }
     };
 
-    const fetchAttendanceStatus = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/attendance/status', {withCredentials: true});
-            setAttendanceStatus(response.data.status);
-        } catch (error) {
-            console.error('Error fetching attendance status', error);
-        }
-    }
 
     const scanUsers = async() => {
         const recordData = {
@@ -42,9 +31,7 @@ function Home () {
 
         try {
             await axios.post('http://localhost:5000/api/attendance', recordData, {withCredentials: true});
-            await axios.post('http://localhost:5000/api/attendance/toggle', {}, {withCredentials: true});
             updateAttendance();
-            fetchAttendanceStatus();
         } catch (error) {
             console.error('Error saving attendance data:', error);
         }
@@ -75,7 +62,6 @@ function Home () {
                                 label="On"
                                 name="group1"
                                 type={type}
-                                checked={attendanceStatus}
                                 id={`inline-checkbox-1`}
                                 readOnly
                             />
@@ -84,7 +70,6 @@ function Home () {
                                 label="Off"
                                 name="group1"
                                 type={type}
-                                checked={!attendanceStatus}
                                 id={`inline-checkbox-2`}
                                 readOnly
                             />

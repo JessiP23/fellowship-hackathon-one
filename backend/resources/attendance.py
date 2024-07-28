@@ -4,31 +4,6 @@ from app import db
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required
 
-class AttendanceStatus(Resource):
-    def get(self):
-        try:
-            attendance = Attendance.query.order_by(Attendance.id.desc()).first()
-            if attendance:
-                return {'status': attendance.status}, 200
-
-            return {'status': False}, 200
-
-        except Exception as e:
-            return {'message': str(e)}, 500
-
-class AttendanceToggle(Resource):
-    def post(self):
-        try:
-            attendance = Attendance.query.order_by(Attendance.id.desc()).first()
-            if attendance and attendance.status:
-                attendance.status = False
-            else:
-                new_attendance = Attendance(status=True)
-                db.session.add(new_attendance)
-            db.session.commit()
-            return {'message': 'Attendance status toggled'}, 200
-        except Exception as e:
-            return {'message': str(e)}, 500
 
 class AttendanceList(Resource):
     def get(self):
