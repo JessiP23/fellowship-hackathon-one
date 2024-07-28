@@ -10,8 +10,11 @@ class User(db.Model):
     
 class Attendance(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.String(80), nullable=False)
-    location = db.Column(db.String(120), nullable=False)
+    status = db.Column(db.Boolean, default=False)
     
     def __repr__(self):
         return f"Attendance(date={self.date}, location={self.location})"
+    
+class AttendanceStatus(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    is_active = db.Column(db.Boolean, default=False)

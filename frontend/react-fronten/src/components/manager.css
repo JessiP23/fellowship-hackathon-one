@@ -1,0 +1,9 @@
+.setup {
+    margin: 1em;
+}
+
+.input-date{
+    position: absolute;
+    left: 5em;
+    width: 60%;
+}

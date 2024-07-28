@@ -1,14 +1,10 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask_restful import Api
-from flask_migrate import Migrate
+from extensions import db, jwt, migrate
+from resources.attendance import AttendanceToggle, AttendanceStatus
 
-# Initialize Flask extensions
-db = SQLAlchemy()
-jwt = JWTManager()
-migrate = Migrate()
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
@@ -41,6 +37,8 @@ def create_app():
         api.add_resource(UserLogin, '/login')
         api.add_resource(AttendanceRecord, '/api/attendance')
         api.add_resource(AttendanceList, '/api/attendance/list')
+        api.add_resource(AttendanceToggle, '/api/attendance/toggle')
+        api.add_resource(AttendanceStatus, '/api/attendance/status')
 
         db.create_all()
 
